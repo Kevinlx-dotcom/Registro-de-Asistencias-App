@@ -1,18 +1,17 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.serialization)
+    kotlin("plugin.serialization")version "1.9.24"
 }
 
 android {
-    namespace = "com.example.registrodeasistencias"
+    namespace = "com.example.appcursos"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "com.example.registrodeasistencias"
-        minSdk = 24
+        applicationId = "com.example.appcursos"
+        minSdk = 28
         targetSdk = 37
         versionCode = 1
         versionName = "1.0"
@@ -23,7 +22,8 @@ android {
     buildTypes {
         release {
             optimization {
-                enable = false
+                enable = true
+
             }
         }
     }
@@ -31,36 +31,30 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.serialization)
-    implementation(libs.okhttp)
-    implementation(libs.okhttp.logging)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.glide)
-    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.cardview)
-    implementation(libs.google.material)
-
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.material)
     testImplementation(libs.junit)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
-    debugImplementation(libs.androidx.compose.ui.tooling)
+
+    // 2. Librería principal de Kotlinx Serialization Json
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+
+    // 3. Convertidor oficial de Retrofit para Kotlinx Serialization
+    implementation("com.squareup.retrofit2:converter-kotlinx-serialization:2.11.0")
+
+    // Retrofit & OkHttp
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    // Para imágenes
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }
