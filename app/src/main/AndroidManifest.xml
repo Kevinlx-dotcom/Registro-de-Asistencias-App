@@ -37,21 +37,38 @@
             </intent-filter>
 
         </activity>
+
+        <!-- Activities de desarrollo -->
         <activity
             android:name=".Vista.InicioActivity"
             android:exported="false" />
+
         <activity
             android:name=".Vista.RecuperarActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".Vista.CambiarClaveActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".Vista.MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
+        <!-- Activities de mi rama -->
+        <activity
+            android:name=".Vista.JustificarActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".Vista.DetalleReporteActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>
