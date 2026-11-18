@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Custom Colors for Asistencia UI -->
+    <color name="green_primary">#15803D</color>
+    <color name="green_dark">#166534</color>
+    <color name="orange_warning">#C25E00</color>
+    <color name="text_primary">#111827</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="text_muted">#9CA3AF</color>
+    <color name="divider_color">#E5E7EB</color>
+    <color name="bg_light">#F9FAFB</color>
 </resources>

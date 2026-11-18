@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Registro de Asistencias</string>
+    <string name="asistencia_title">Asistencia</string>
+    <string name="reportes">Reportes</string>
+    <string name="lista">Lista</string>
+    <string name="calendario">Calendario</string>
+    <string name="entradas_salidas">Entradas/Salidas</string>
+    <string name="retardos">Retardos</string>
+    <string name="faltas">Faltas</string>
+    <string name="descuentos">Descuentos</string>
+    <string name="summary_sample">18 asistencias · 1 retardo · 0 faltas</string>
+    <string name="a_tiempo">A tiempo</string>
+    <string name="retardo">Retardo</string>
+    <string name="justificar_ahora">Justificar ahora</string>
+    <string name="inicio">Inicio</string>
+    <string name="justificar">Justificar</string>
+    <string name="mes_anterior">Mes anterior</string>
+    <string name="mes_siguiente">Mes siguiente</string>
+    <string name="octubre_2026">Octubre 2026</string>
 </resources>
