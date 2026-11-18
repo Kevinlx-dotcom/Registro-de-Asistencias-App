@@ -5,7 +5,6 @@ import com.example.appcursos.Modelo.dataEntradasSalidas
 import com.example.appcursos.Modelo.dataEstadisticas
 import com.example.appcursos.Modelo.dataIncidencias
 import com.example.appcursos.Modelo.dataPermisos
-import com.example.appcursos.Modelo.dataRespuesta
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -14,26 +13,26 @@ interface ApiService {
     @GET("obtener_estadisticas.php")
     suspend fun obtenerEstadisticas(
         @Query("periodo") periodo: String
-    ): dataRespuesta<dataEstadisticas>
+    ): dataEstadisticas
 
     @GET("obtener_entradas_salidas.php")
     suspend fun obtenerEntradasSalidas(
         @Query("periodo") periodo: String
-    ): dataRespuesta<List<dataEntradasSalidas>>
+    ): List<dataEntradasSalidas>
 
     @GET("obtener_incidencias.php")
     suspend fun obtenerIncidencias(
         @Query("periodo") periodo: String,
         @Query("tipo") tipo: String
-    ): dataRespuesta<List<dataIncidencias>>
+    ): List<dataIncidencias>
 
     @GET("obtener_descuentos.php")
     suspend fun obtenerDescuentos(
         @Query("periodo") periodo: String
-    ): dataRespuesta<List<dataDescuentos>>
+    ): List<dataDescuentos>
 
     @GET("obtener_permisos.php")
     suspend fun obtenerPermisos(
         @Query("periodo") periodo: String
-    ): dataRespuesta<List<dataPermisos>>
+    ): List<dataPermisos>
 }
