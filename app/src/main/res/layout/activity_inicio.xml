@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Vista.InicioActivity">
+
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:letterSpacing="0.15"
+        android:text="S.I.C.A.G.I"
+        android:textColor="@color/green_primary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="⋮"
+        android:textColor="@color/text_primary"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/txtTitulo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/txtTitulo" />
+
+    <View
+        android:id="@+id/vwLineaTop"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/divider_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtTitulo" />
+
+    <TextView
+        android:id="@+id/txtBienvenida"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="16dp"
+        android:text="Bienvenido(a)"
+        android:textColor="@color/text_primary"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vwLineaTop" />
+
+    <TextView
+        android:id="@+id/txtFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text=""
+        android:textColor="@color/text_secondary"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtBienvenida" />
+
+    <View
+        android:id="@+id/vwAviso"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_aviso"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtFecha" />
+
+    <TextView
+        android:id="@+id/txtAviso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/warning_text"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/vwAviso"
+        app:layout_constraintStart_toStartOf="@id/vwAviso"
+        app:layout_constraintTop_toTopOf="@id/vwAviso" />
+
+    <TextView
+        android:id="@+id/txtJustificarAhora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Justificar ahora"
+        android:textColor="@color/warning_text"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/vwAviso"
+        app:layout_constraintEnd_toEndOf="@id/vwAviso"
+        app:layout_constraintTop_toTopOf="@id/vwAviso" />
+
+    <TextView
+        android:id="@+id/txtChecadasTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:text="ÚLTIMAS CHECADAS DEL DÍA"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vwAviso" />
+
+    <View
+        android:id="@+id/vwChecadas"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_campo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtChecadasTitulo" />
+
+    <View
+        android:id="@+id/vwDivisor"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="1dp"
+        android:background="@color/border_gray"
+        app:layout_constraintBottom_toBottomOf="@id/vwChecadas"
+        app:layout_constraintEnd_toEndOf="@id/vwChecadas"
+        app:layout_constraintStart_toStartOf="@id/vwChecadas"
+        app:layout_constraintTop_toTopOf="@id/vwChecadas" />
+
+    <TextView
+        android:id="@+id/txtEntradaEtiqueta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="Entrada"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@id/vwChecadas"
+        app:layout_constraintTop_toTopOf="@id/vwChecadas" />
+
+    <TextView
+        android:id="@+id/txtEntradaHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="—"
+        android:textColor="@color/text_primary"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/txtEntradaEtiqueta"
+        app:layout_constraintTop_toBottomOf="@id/txtEntradaEtiqueta" />
+
+    <TextView
+        android:id="@+id/txtEntradaEstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sin registro"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/txtEntradaEtiqueta"
+        app:layout_constraintTop_toBottomOf="@id/txtEntradaHora" />
+
+    <TextView
+        android:id="@+id/txtSalidaEtiqueta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Salida"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@id/vwDivisor"
+        app:layout_constraintTop_toTopOf="@id/txtEntradaEtiqueta" />
+
+    <TextView
+        android:id="@+id/txtSalidaHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="—"
+        android:textColor="@color/text_primary"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/txtSalidaEtiqueta"
+        app:layout_constraintTop_toBottomOf="@id/txtSalidaEtiqueta" />
+
+    <TextView
+        android:id="@+id/txtSalidaEstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sin registro"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/txtSalidaEtiqueta"
+        app:layout_constraintTop_toBottomOf="@id/txtSalidaHora" />
+
+    <TextView
+        android:id="@+id/txtConsultasTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:text="CONSULTAS DEL MES"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vwChecadas" />
+
+    <TextView
+        android:id="@+id/txtEntradasSalidas"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableEnd="@drawable/ic_chevron_right"
+        android:drawableTint="@color/text_secondary"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:text="Entradas/Salidas"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtConsultasTitulo" />
+
+    <View
+        android:id="@+id/vwLinea1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@color/divider_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtEntradasSalidas" />
+
+    <TextView
+        android:id="@+id/txtRetardos"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableEnd="@drawable/ic_chevron_right"
+        android:drawableTint="@color/text_secondary"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:text="Retardos"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vwLinea1" />
+
+    <TextView
+        android:id="@+id/txtAtajosTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="ATAJOS Y CONTACTOS"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtRetardos" />
+
+    <TextView
+        android:id="@+id/txtContactos"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableEnd="@drawable/ic_chevron_right"
+        android:drawableTint="@color/text_secondary"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:text="Contactos"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtAtajosTitulo" />
+
+    <View
+        android:id="@+id/vwLinea2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@color/divider_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtContactos" />
+
+    <TextView
+        android:id="@+id/txtAdministracion"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableEnd="@drawable/ic_chevron_right"
+        android:drawableTint="@color/text_secondary"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:text="Administración"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vwLinea2" />
+
+    <View
+        android:id="@+id/vwLinea3"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@color/divider_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtAdministracion" />
+
+    <TextView
+        android:id="@+id/txtDirectivos"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableEnd="@drawable/ic_chevron_right"
+        android:drawableTint="@color/text_secondary"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:text="Directivos"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vwLinea3" />
+
+    <View
+        android:id="@+id/vwLineaNav"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="64dp"
+        android:background="@color/divider_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtNavInicio"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:drawablePadding="2dp"
+        android:drawableTint="@color/green_primary"
+        android:drawableTop="@drawable/ic_home"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:text="Inicio"
+        android:textColor="@color/green_primary"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/txtNavAsistencia"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtNavAsistencia"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:drawablePadding="2dp"
+        android:drawableTint="@color/text_secondary"
+        android:drawableTop="@drawable/ic_asistencia"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:text="Asistencia"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/txtNavJustificar"
+        app:layout_constraintStart_toEndOf="@id/txtNavInicio" />
+
+    <TextView
+        android:id="@+id/txtNavJustificar"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:drawablePadding="2dp"
+        android:drawableTint="@color/text_secondary"
+        android:drawableTop="@drawable/ic_justificar"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:text="Justificar"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/txtNavAsistencia" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
