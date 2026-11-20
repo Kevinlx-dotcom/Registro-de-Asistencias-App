@@ -11,10 +11,15 @@ import com.example.appAsistencias.Datos.dataInicio
 import com.example.appAsistencias.Datos.dataPermisos
 import com.example.appAsistencias.Datos.RecuperarRequest
 import com.example.appAsistencias.Datos.RecuperarResponse
+import com.example.appAsistencias.Datos.DataContactosRespuesta
+import com.example.appAsistencias.Datos.DataReportesRespuesta
+import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
+import retrofit2.http.Streaming
 
 interface ApiService {
 
@@ -60,4 +65,23 @@ interface ApiService {
 
     @POST("cambiar_contrasena.php")
     suspend fun cambiarContrasena(@Body request: CambiarClaveRequest): RecuperarResponse
+
+    // contactos
+    @GET("obtener_contactos.php")
+    fun obtenerContactos(): Call<DataContactosRespuesta>
+
+    // reportes
+    @GET("obtener_reportes.php")
+    fun obtenerReportes(
+        @Query("idTrabajador") idTrabajador: Int
+    ): Call<DataReportesRespuesta>
+
+    @Streaming
+    @GET("descargar_reporte.php")
+    fun solicitarDescargaReporte(
+        @Query("idTrabajador") idTrabajador: Int,
+        @Query("anio") anio: Int,
+        @Query("mes") mes: Int,
+        @Query("formato") formato: String
+    ): Call<ResponseBody>
 }
