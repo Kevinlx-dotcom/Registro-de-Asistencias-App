@@ -3,9 +3,14 @@ package com.example.appcursos.InterfaceApi
 import com.example.appcursos.Modelo.dataDescuentos
 import com.example.appcursos.Modelo.dataEntradasSalidas
 import com.example.appcursos.Modelo.dataEstadisticas
+import com.example.appcursos.Modelo.LoginRequest
+import com.example.appcursos.Modelo.LoginResponse
 import com.example.appcursos.Modelo.dataIncidencias
+import com.example.appcursos.Modelo.dataInicio
 import com.example.appcursos.Modelo.dataPermisos
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ApiService {
@@ -35,4 +40,14 @@ interface ApiService {
     suspend fun obtenerPermisos(
         @Query("periodo") periodo: String
     ): List<dataPermisos>
+
+    // login
+    @POST("login.php")
+    suspend fun iniciarSesion(@Body request: LoginRequest): LoginResponse
+
+    // inicio
+    @GET("obtener_inicio.php")
+    suspend fun obtenerInicio(
+        @Query("idTrabajador") idTrabajador: Int
+    ): dataInicio
 }

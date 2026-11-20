@@ -17,4 +17,10 @@
     <color name="text_muted">#9CA3AF</color>
     <color name="divider_color">#E5E7EB</color>
     <color name="bg_light">#F9FAFB</color>
+
+    <!-- Colores de Inicio de sesión e Inicio -->
+    <color name="gold_bar">#E3B23C</color>
+    <color name="border_gray">#D1D5DB</color>
+    <color name="warning_bg">#FEF3C7</color>
+    <color name="warning_text">#92400E</color>
 </resources>

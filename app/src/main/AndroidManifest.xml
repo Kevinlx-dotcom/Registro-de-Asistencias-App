@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RegistroDeAsistencias">
         <activity
-            android:name=".Vista.MainActivity"
+            android:name=".Vista.LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -23,6 +23,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Vista.InicioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Vista.MainActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
