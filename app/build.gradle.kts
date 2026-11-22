@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.appcursos"
+    namespace = "com.example.appAsistencias"
     compileSdk {
         version = release(37)
     }

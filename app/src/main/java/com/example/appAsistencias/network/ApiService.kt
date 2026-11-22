@@ -1,13 +1,16 @@
-package com.example.appcursos.InterfaceApi
+package com.example.appAsistencias.network
 
-import com.example.appcursos.Modelo.dataDescuentos
-import com.example.appcursos.Modelo.dataEntradasSalidas
-import com.example.appcursos.Modelo.dataEstadisticas
-import com.example.appcursos.Modelo.LoginRequest
-import com.example.appcursos.Modelo.LoginResponse
-import com.example.appcursos.Modelo.dataIncidencias
-import com.example.appcursos.Modelo.dataInicio
-import com.example.appcursos.Modelo.dataPermisos
+import com.example.appAsistencias.Datos.CambiarClaveRequest
+import com.example.appAsistencias.Datos.dataDescuentos
+import com.example.appAsistencias.Datos.dataEntradasSalidas
+import com.example.appAsistencias.Datos.dataEstadisticas
+import com.example.appAsistencias.Datos.LoginRequest
+import com.example.appAsistencias.Datos.LoginResponse
+import com.example.appAsistencias.Datos.dataIncidencias
+import com.example.appAsistencias.Datos.dataInicio
+import com.example.appAsistencias.Datos.dataPermisos
+import com.example.appAsistencias.Datos.RecuperarRequest
+import com.example.appAsistencias.Datos.RecuperarResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -50,4 +53,11 @@ interface ApiService {
     suspend fun obtenerInicio(
         @Query("idTrabajador") idTrabajador: Int
     ): dataInicio
+
+    // recuperar contraseña
+    @POST("solicitar_recuperacion.php")
+    suspend fun solicitarRecuperacion(@Body request: RecuperarRequest): RecuperarResponse
+
+    @POST("cambiar_contrasena.php")
+    suspend fun cambiarContrasena(@Body request: CambiarClaveRequest): RecuperarResponse
 }

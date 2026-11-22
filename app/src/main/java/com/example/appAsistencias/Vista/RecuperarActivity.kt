@@ -1,4 +1,4 @@
-package com.example.appcursos.Vista
+package com.example.appAsistencias.Vista
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,19 +10,18 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.appcursos.Presentador.clsLoginPresentador
-import com.example.appcursos.R
+import com.example.appAsistencias.Presentador.clsRecuperarPresentador
+import com.example.appAsistencias.R
 
-class LoginActivity : AppCompatActivity() {
-    private lateinit var presenter: clsLoginPresentador
+class RecuperarActivity : AppCompatActivity() {
+    private lateinit var presenter: clsRecuperarPresentador
     private lateinit var txtCorreo: EditText
-    private lateinit var txtClave: EditText
-    private lateinit var btnLogin: Button
+    private lateinit var btnEnviarCodigo: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_recuperar)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -31,26 +30,23 @@ class LoginActivity : AppCompatActivity() {
 
         //1.Enlazar componentes
         txtCorreo = findViewById(R.id.txtCorreo)
-        txtClave = findViewById(R.id.txtClave)
-        btnLogin = findViewById(R.id.btnLogin)
+        btnEnviarCodigo = findViewById(R.id.btnEnviarCodigo)
 
         //2. inicializar presentador
-        presenter = clsLoginPresentador(this)
+        presenter = clsRecuperarPresentador(this)
 
         //3.Listener del botón
-        btnLogin.setOnClickListener(this::ejecutarInicioSesion)
+        btnEnviarCodigo.setOnClickListener(this::ejecutarEnviarCodigo)
     }
 
-    fun ejecutarInicioSesion(v: View) {
-        val correo = txtCorreo.text.toString().trim()
-        val clave = txtClave.text.toString().trim()
-        presenter.realizarLogin(correo, clave)
+    fun ejecutarEnviarCodigo(v: View) {
+        presenter.enviarCodigo(txtCorreo.text.toString().trim())
     }
 
-    fun loginExitoso(mensaje: String, idTrabajador: Int) {
-        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
-        val intent = Intent(this, InicioActivity::class.java)
-        intent.putExtra("ID_TRABAJADOR", idTrabajador)
+    fun codigoEnviado(mensaje: String) {
+        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+        val intent = Intent(this, CambiarClaveActivity::class.java)
+        intent.putExtra("CORREO", txtCorreo.text.toString().trim())
         startActivity(intent)
         finish()
     }

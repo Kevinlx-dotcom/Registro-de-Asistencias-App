@@ -1,7 +1,7 @@
-package com.example.appcursos.Presentador
+package com.example.appAsistencias.Presentador
 
-import com.example.appcursos.Modelo.clsInicioModelo
-import com.example.appcursos.Vista.InicioActivity
+import com.example.appAsistencias.Modelo.clsInicioModelo
+import com.example.appAsistencias.Vista.InicioActivity
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale

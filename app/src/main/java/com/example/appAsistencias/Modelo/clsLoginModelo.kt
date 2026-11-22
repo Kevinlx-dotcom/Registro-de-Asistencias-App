@@ -1,4 +1,8 @@
-package com.example.appcursos.Modelo
+package com.example.appAsistencias.Modelo
+
+import com.example.appAsistencias.Datos.LoginRequest
+import com.example.appAsistencias.Datos.LoginResponse
+import com.example.appAsistencias.network.RetrofitCliente
 
 class clsLoginModelo {
     suspend fun autenticarUsuario(correo: String, clave: String): LoginResponse {
