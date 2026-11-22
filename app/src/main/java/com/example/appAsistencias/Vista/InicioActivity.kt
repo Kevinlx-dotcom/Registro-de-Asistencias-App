@@ -1,4 +1,4 @@
-package com.example.appcursos.Vista
+package com.example.appAsistencias.Vista
 
 import android.os.Bundle
 import android.view.View
@@ -8,8 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.appcursos.Presentador.clsInicioPresentador
-import com.example.appcursos.R
+import com.example.appAsistencias.Presentador.clsInicioPresentador
+import com.example.appAsistencias.R
 
 class InicioActivity : AppCompatActivity() {
     private lateinit var presenter: clsInicioPresentador

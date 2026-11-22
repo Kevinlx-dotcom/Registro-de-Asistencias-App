@@ -1,7 +1,7 @@
-package com.example.appcursos.Presentador
+package com.example.appAsistencias.Presentador
 
-import com.example.appcursos.Modelo.clsLoginModelo
-import com.example.appcursos.Vista.LoginActivity
+import com.example.appAsistencias.Modelo.clsLoginModelo
+import com.example.appAsistencias.Vista.LoginActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

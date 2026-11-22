@@ -1,4 +1,7 @@
-package com.example.appcursos.Modelo
+package com.example.appAsistencias.Modelo
+
+import com.example.appAsistencias.Datos.dataInicio
+import com.example.appAsistencias.network.RetrofitCliente
 
 class clsInicioModelo {
     suspend fun obtenerInicio(idTrabajador: Int): dataInicio {

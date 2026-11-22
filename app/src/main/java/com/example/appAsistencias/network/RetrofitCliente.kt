@@ -1,6 +1,5 @@
-package com.example.appcursos.Modelo
+package com.example.appAsistencias.network
 
-import com.example.appcursos.InterfaceApi.ApiService
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
