@@ -57,4 +57,7 @@ dependencies {
 
     // Para imágenes
     implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // Para la huella digital
+    implementation("androidx.biometric:biometric:1.1.0")
 }
