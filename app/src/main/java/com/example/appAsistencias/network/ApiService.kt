@@ -76,7 +76,7 @@ interface ApiService {
 
     // contactos
     @GET("obtener_contactos.php")
-    suspend fun obtenerContactos(): DataContactosRespuesta
+    fun obtenerContactos(): Call<DataContactosRespuesta>
 
     // reportes
     @GET("obtener_reportes.php")
