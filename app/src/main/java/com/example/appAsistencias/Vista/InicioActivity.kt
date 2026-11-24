@@ -61,6 +61,8 @@ class InicioActivity : AppCompatActivity() {
 
         //4.Listener del menú
         txtMenu.setOnClickListener(this::ejecutarMenu)
+        findViewById<View>(R.id.navAsistencia).setOnClickListener { abrirAsistencias(0) }
+        txtJustificarAhora.setOnClickListener { abrirAsistencias(1) }
     }
 
     override fun onResume() {
@@ -118,6 +120,14 @@ class InicioActivity : AppCompatActivity() {
 
     fun mostrarError(mensaje: String) {
         Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+    }
+
+    // Abre la pantalla de asistencias (0 = Entradas/Salidas, 1 = Retardos)
+    fun abrirAsistencias(pestana: Int) {
+        val intent = Intent(this, AsistenciasActivity::class.java)
+        intent.putExtra("ID_TRABAJADOR", idTrabajador)
+        intent.putExtra("TAB", pestana)
+        startActivity(intent)
     }
 
     // Regresa al login y borra las pantallas anteriores
