@@ -10,8 +10,7 @@ import com.example.appAsistencias.Datos.DataContacto
 import com.example.appAsistencias.Datos.DataContactosRespuesta
 import com.example.appAsistencias.Presentador.clsContactosPresentador
 
-class ContactosActivity : AppCompatActivity(),
-    clsContactosPresentador.Vista {
+class ContactosActivity : AppCompatActivity() {
 
     private lateinit var contenido: TextView
     private lateinit var presentador: clsContactosPresentador
@@ -48,7 +47,7 @@ class ContactosActivity : AppCompatActivity(),
         presentador.cargarContactos()
     }
 
-    override fun mostrarContactos(datos: DataContactosRespuesta) {
+    fun mostrarContactos(datos: DataContactosRespuesta) {
         if (isFinishing || isDestroyed) return
 
         val grupos = listOf(
@@ -71,7 +70,7 @@ class ContactosActivity : AppCompatActivity(),
         }
     }
 
-    override fun mostrarError(mensaje: String) {
+    fun mostrarError(mensaje: String) {
         if (!isFinishing && !isDestroyed) {
             contenido.text = mensaje
         }

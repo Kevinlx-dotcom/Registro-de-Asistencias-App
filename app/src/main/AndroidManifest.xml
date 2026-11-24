@@ -15,6 +15,10 @@
         android:theme="@style/Theme.RegistroDeAsistencias">
 
         <activity
+            android:name=".Vista.AsistenciasActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".Vista.ContactosActivity"
             android:exported="false" />
 

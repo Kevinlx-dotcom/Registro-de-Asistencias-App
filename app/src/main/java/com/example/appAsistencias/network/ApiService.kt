@@ -25,24 +25,32 @@ interface ApiService {
 
     @GET("obtener_estadisticas.php")
     suspend fun obtenerEstadisticas(
-        @Query("periodo") periodo: String
+        @Query("idTrabajador") idTrabajador: Int,
+        @Query("anio") anio: Int,
+        @Query("mes") mes: Int
     ): dataEstadisticas
 
     @GET("obtener_entradas_salidas.php")
     suspend fun obtenerEntradasSalidas(
-        @Query("periodo") periodo: String
-    ): List<dataEntradasSalidas>
+        @Query("idTrabajador") idTrabajador: Int,
+        @Query("anio") anio: Int,
+        @Query("mes") mes: Int
+    ): dataEntradasSalidas
 
     @GET("obtener_incidencias.php")
     suspend fun obtenerIncidencias(
-        @Query("periodo") periodo: String,
+        @Query("idTrabajador") idTrabajador: Int,
+        @Query("anio") anio: Int,
+        @Query("mes") mes: Int,
         @Query("tipo") tipo: String
-    ): List<dataIncidencias>
+    ): dataIncidencias
 
     @GET("obtener_descuentos.php")
     suspend fun obtenerDescuentos(
-        @Query("periodo") periodo: String
-    ): List<dataDescuentos>
+        @Query("idTrabajador") idTrabajador: Int,
+        @Query("anio") anio: Int,
+        @Query("mes") mes: Int
+    ): dataDescuentos
 
     @GET("obtener_permisos.php")
     suspend fun obtenerPermisos(
@@ -68,7 +76,7 @@ interface ApiService {
 
     // contactos
     @GET("obtener_contactos.php")
-    fun obtenerContactos(): Call<DataContactosRespuesta>
+    suspend fun obtenerContactos(): DataContactosRespuesta
 
     // reportes
     @GET("obtener_reportes.php")

@@ -1,5 +1,6 @@
 package com.example.appAsistencias.Modelo;
 
+import com.example.appAsistencias.Datos.DataReportesRespuesta;
 import com.example.appAsistencias.network.RetrofitCliente;
 
 import okhttp3.ResponseBody;
