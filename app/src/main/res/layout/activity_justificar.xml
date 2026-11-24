@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Vista.JustificarActivity">
+    android:layout_height="match_parent">
 
     <!-- Barra Superior -->
     <TextView
@@ -43,9 +42,10 @@
             android:padding="16dp">
 
             <TextView
+                android:id="@+id/txtTituloPendientes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PENDIENTES POR JUSTIFICAR (1)"
+                android:text="PENDIENTES POR JUSTIFICAR"
                 android:textSize="11sp"
                 android:textStyle="bold"
                 android:textColor="#555555" />
@@ -63,7 +63,7 @@
                     android:id="@+id/txtTipoFechaIncidencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Retardo · 22 de octubre"
+                    android:text=""
                     android:textStyle="bold"
                     android:textSize="14sp"
                     android:textColor="#333333" />
@@ -73,11 +73,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Entrada 07:08 h"
+                    android:text=""
                     android:textSize="12sp"
                     android:textColor="#555555" />
 
                 <TextView
+                    android:id="@+id/txtAvisoInstruccion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
@@ -91,6 +92,7 @@
 
     <!-- Documentos Requeridos -->
     <LinearLayout
+        android:id="@+id/layoutDocumentos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -102,21 +104,23 @@
         app:layout_constraintTop_toBottomOf="@id/cardPendiente">
 
         <TextView
+            android:id="@+id/txtTituloDocumentos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="DOCUMENTOS PARA JUSTIFICAR UN RETARDO"
+            android:text="DOCUMENTOS REQUERIDOS"
             android:textSize="11sp"
             android:textStyle="bold"
             android:textColor="#555555" />
 
         <TextView
+            android:id="@+id/txtDoc1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:drawableStart="@android:drawable/checkbox_on_background"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
-            android:text="Documento requerido 1\nEjemplo: comprobante del motivo del retardo"
+            android:text=""
             android:textSize="12sp"
             android:textColor="#333333" />
 
@@ -127,13 +131,14 @@
             android:background="#E0E0E0" />
 
         <TextView
+            android:id="@+id/txtDoc2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:drawableStart="@android:drawable/checkbox_on_background"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
-            android:text="Documento requerido 2\nEjemplo: oficio de justificación firmado"
+            android:text=""
             android:textSize="12sp"
             android:textColor="#333333" />
 
@@ -144,17 +149,19 @@
             android:background="#E0E0E0" />
 
         <TextView
+            android:id="@+id/txtDoc3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:drawableStart="@android:drawable/checkbox_on_background"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
-            android:text="Documento requerido 3\nEjemplo: copia de identificación oficial"
+            android:text=""
             android:textSize="12sp"
             android:textColor="#333333" />
 
         <TextView
+            android:id="@+id/txtNotaDocumentos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
