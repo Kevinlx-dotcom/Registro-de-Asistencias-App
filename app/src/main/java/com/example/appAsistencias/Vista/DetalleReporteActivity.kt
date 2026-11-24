@@ -27,6 +27,8 @@ class DetalleReporteActivity : AppCompatActivity() {
     private lateinit var btnDescargarExcel: Button
 
     private var idTrabajador = 0
+    private var anio = 0
+    private var mes = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,25 +52,23 @@ class DetalleReporteActivity : AppCompatActivity() {
         btnDescargarPdf = findViewById(R.id.btnDescargarPdf)
         btnDescargarExcel = findViewById(R.id.btnDescargarExcel)
 
-        // 2. Obtener el ID del trabajador enviado
+        // 2. Obtener los datos enviados desde Reportes
         idTrabajador = intent.getIntExtra("ID_TRABAJADOR", 0)
+        anio = intent.getIntExtra("ANIO", 0)
+        mes = intent.getIntExtra("MES", 0)
 
-        // 3. Inicializar el presentador
+        // 3. Inicializar el presentador y cargar el detalle
         presenter = clsDetalleReportePresentador(this)
+        presenter.obtenerDetalleReporte(idTrabajador, anio, mes)
     }
 
-    override fun onResume() {
-        super.onResume()
-        presenter.obtenerDetalleReporte("2026-10")
-    }
-
-    fun mostrarDetalleReporte(estadisticas: dataEstadisticas, entradasSalidas: List<dataEntradasSalidas>) {
-        txtNumAsistencias.text = estadisticas.asistencias.toString()
-        txtNumEntradas.text = estadisticas.asistencias.toString()
-        txtNumSalidas.text = estadisticas.asistencias.toString()
-        txtNumRetardos.text = estadisticas.retardos.toString()
-        txtNumFaltas.text = estadisticas.faltas.toString()
-        txtNumReportes.text = estadisticas.descuentos.toString()
+    fun mostrarDetalleReporte(estadisticas: dataEstadisticas, entradasSalidas: dataEntradasSalidas) {
+        txtNumAsistencias.text = estadisticas.estadisticas.asistencias.toString()
+        txtNumEntradas.text = estadisticas.estadisticas.entradas.toString()
+        txtNumSalidas.text = estadisticas.estadisticas.salidas.toString()
+        txtNumRetardos.text = estadisticas.estadisticas.retardos.toString()
+        txtNumFaltas.text = estadisticas.estadisticas.faltas.toString()
+        txtNumReportes.text = estadisticas.estadisticas.reportes.toString()
     }
 
     fun mostrarError(mensaje: String) {

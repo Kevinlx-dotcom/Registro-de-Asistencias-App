@@ -6,11 +6,11 @@ import com.example.appAsistencias.network.RetrofitCliente
 
 class clsDetalleReporteModelo {
 
-    suspend fun obtenerEstadisticas(periodo: String): dataEstadisticas {
-        return RetrofitCliente.apiService.obtenerEstadisticas(periodo)
+    suspend fun obtenerEstadisticas(idTrabajador: Int, anio: Int, mes: Int): dataEstadisticas {
+        return RetrofitCliente.apiService.obtenerEstadisticas(idTrabajador, anio, mes)
     }
 
-    suspend fun obtenerEntradasSalidas(periodo: String): List<dataEntradasSalidas> {
-        return RetrofitCliente.apiService.obtenerEntradasSalidas(periodo)
+    suspend fun obtenerEntradasSalidas(idTrabajador: Int, anio: Int, mes: Int): dataEntradasSalidas {
+        return RetrofitCliente.apiService.obtenerEntradasSalidas(idTrabajador, anio, mes)
     }
 }
