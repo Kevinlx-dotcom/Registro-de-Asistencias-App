@@ -8,6 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.appAsistencias.Datos.dataEntradasSalidas
 import com.example.appAsistencias.Datos.dataEstadisticas
 import com.example.appAsistencias.Presentador.clsDetalleReportePresentador
@@ -23,6 +25,7 @@ class DetalleReporteActivity : AppCompatActivity() {
     private lateinit var txtNumRetardos: TextView
     private lateinit var txtNumFaltas: TextView
     private lateinit var txtNumReportes: TextView
+    private lateinit var rvDetalleMes: RecyclerView
     private lateinit var btnDescargarPdf: Button
     private lateinit var btnDescargarExcel: Button
 
@@ -49,8 +52,11 @@ class DetalleReporteActivity : AppCompatActivity() {
         txtNumRetardos = findViewById(R.id.txtNumRetardos)
         txtNumFaltas = findViewById(R.id.txtNumFaltas)
         txtNumReportes = findViewById(R.id.txtNumReportes)
+        rvDetalleMes = findViewById(R.id.rvDetalleMes)
         btnDescargarPdf = findViewById(R.id.btnDescargarPdf)
         btnDescargarExcel = findViewById(R.id.btnDescargarExcel)
+
+        rvDetalleMes.layoutManager = LinearLayoutManager(this)
 
         // 2. Obtener los datos enviados desde Reportes
         idTrabajador = intent.getIntExtra("ID_TRABAJADOR", 0)
@@ -69,6 +75,8 @@ class DetalleReporteActivity : AppCompatActivity() {
         txtNumRetardos.text = estadisticas.estadisticas.retardos.toString()
         txtNumFaltas.text = estadisticas.estadisticas.faltas.toString()
         txtNumReportes.text = estadisticas.estadisticas.reportes.toString()
+
+        rvDetalleMes.adapter = DetalleAdapter(entradasSalidas.dias)
     }
 
     fun mostrarError(mensaje: String) {
