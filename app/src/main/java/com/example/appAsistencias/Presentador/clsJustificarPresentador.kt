@@ -14,25 +14,51 @@ class clsJustificarPresentador(private val vista: JustificarActivity) {
     fun obtenerPendientes(idTrabajador: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val listaPendiente = justificarModelo.obtenerPendientes(idTrabajador)
+                val respuesta = justificarModelo.obtenerPendientes(idTrabajador)
                 withContext(Dispatchers.Main) {
-                    vista.mostrarPendientes(listaPendiente)
+                    if (respuesta.exito) {
+                        val primero = respuesta.pendientes.firstOrNull()
+                        if (primero != null) {
+                            vista.mostrarPendiente(
+                                "${primero.tipo} · ${primero.fecha}",
+                                "Entrada ${primero.entrada ?: "--:--"}"
+                            )
+                            // Cargar los documentos de este tipo de incidencia (Retardo o Falta)
+                            obtenerDocumentosJustificar(primero.tipo)
+                        }
+                    } else {
+                        vista.mostrarError(respuesta.mensaje)
+                    }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                withContext(Dispatchers.Main) {
+                    vista.mostrarError("No se pudieron cargar los pendientes")
+                }
             }
         }
     }
 
-    fun obtenerDocumentosJustificar(tipoIncidencia: String) {
+    private fun obtenerDocumentosJustificar(tipoIncidencia: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val listaDocumentos = justificarModelo.obtenerDocumentosJustificar(tipoIncidencia)
+                val respuesta = justificarModelo.obtenerDocumentosJustificar(tipoIncidencia)
                 withContext(Dispatchers.Main) {
-                    vista.mostrarDocumentos(listaDocumentos)
+                    if (respuesta.exito) {
+                        val lista = respuesta.documentos
+                        val doc1 = lista.getOrNull(0)?.let { "${it.nombre}\n${it.descripcion ?: ""}" } ?: ""
+                        val doc2 = lista.getOrNull(1)?.let { "${it.nombre}\n${it.descripcion ?: ""}" } ?: ""
+                        val doc3 = lista.getOrNull(2)?.let { "${it.nombre}\n${it.descripcion ?: ""}" } ?: ""
+                        vista.mostrarDocumentos(doc1, doc2, doc3)
+                    } else {
+                        vista.mostrarError(respuesta.mensaje)
+                    }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                withContext(Dispatchers.Main) {
+                    vista.mostrarError("No se pudieron cargar los documentos")
+                }
             }
         }
     }
