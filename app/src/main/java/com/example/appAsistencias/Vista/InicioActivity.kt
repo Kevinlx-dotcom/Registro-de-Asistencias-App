@@ -1,7 +1,9 @@
 package com.example.appAsistencias.Vista
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -24,6 +26,7 @@ class InicioActivity : AppCompatActivity() {
     private lateinit var txtSalidaEstatus: TextView
     private lateinit var txtEntradasSalidas: TextView
     private lateinit var txtRetardos: TextView
+    private lateinit var txtMenu: TextView
     private var idTrabajador = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,18 +51,33 @@ class InicioActivity : AppCompatActivity() {
         txtSalidaEstatus = findViewById(R.id.txtSalidaEstatus)
         txtEntradasSalidas = findViewById(R.id.txtEntradasSalidas)
         txtRetardos = findViewById(R.id.txtRetardos)
+        txtMenu = findViewById(R.id.txtMenu)
 
         //2. id que llega desde el login
         idTrabajador = intent.getIntExtra("ID_TRABAJADOR", 0)
 
         //3. inicializar presentador
         presenter = clsInicioPresentador(this)
+
+        //4.Listener del menú
+        txtMenu.setOnClickListener(this::ejecutarMenu)
     }
 
     override fun onResume() {
         super.onResume()
         presenter.mostrarFechaYMes()
         presenter.cargarInicio(idTrabajador)
+    }
+
+    // Muestra el menú debajo de los 3 puntos
+    fun ejecutarMenu(v: View) {
+        val menu = PopupMenu(this, v)
+        menu.menu.add("Cerrar sesión")
+        menu.setOnMenuItemClickListener {
+            presenter.cerrarSesion()
+            true
+        }
+        menu.show()
     }
 
     fun mostrarFecha(fecha: String, entradasSalidas: String, retardos: String) {
@@ -100,5 +118,12 @@ class InicioActivity : AppCompatActivity() {
 
     fun mostrarError(mensaje: String) {
         Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+    }
+
+    // Regresa al login y borra las pantallas anteriores
+    fun abrirLogin() {
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 }

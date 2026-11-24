@@ -16,7 +16,7 @@ object RetrofitCliente {
     }
 
     val apiService: ApiService by lazy{
-        val contenType = "aplication/json".toMediaType()
+        val contenType = "application/json".toMediaType()
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(jsonConfig.asConverterFactory(contenType))
