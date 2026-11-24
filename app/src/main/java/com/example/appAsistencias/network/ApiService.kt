@@ -11,38 +11,46 @@ import com.example.appAsistencias.Datos.dataInicio
 import com.example.appAsistencias.Datos.dataPermisos
 import com.example.appAsistencias.Datos.RecuperarRequest
 import com.example.appAsistencias.Datos.RecuperarResponse
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
-
 import com.example.appAsistencias.Datos.DataContactosRespuesta
 import com.example.appAsistencias.Datos.DataReportesRespuesta
 import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Query
 import retrofit2.http.Streaming
+
 interface ApiService {
 
     @GET("obtener_estadisticas.php")
     suspend fun obtenerEstadisticas(
-        @Query("periodo") periodo: String
+        @Query("idTrabajador") idTrabajador: Int,
+        @Query("anio") anio: Int,
+        @Query("mes") mes: Int
     ): dataEstadisticas
 
     @GET("obtener_entradas_salidas.php")
     suspend fun obtenerEntradasSalidas(
-        @Query("periodo") periodo: String
-    ): List<dataEntradasSalidas>
+        @Query("idTrabajador") idTrabajador: Int,
+        @Query("anio") anio: Int,
+        @Query("mes") mes: Int
+    ): dataEntradasSalidas
 
     @GET("obtener_incidencias.php")
     suspend fun obtenerIncidencias(
-        @Query("periodo") periodo: String,
+        @Query("idTrabajador") idTrabajador: Int,
+        @Query("anio") anio: Int,
+        @Query("mes") mes: Int,
         @Query("tipo") tipo: String
-    ): List<dataIncidencias>
+    ): dataIncidencias
 
     @GET("obtener_descuentos.php")
     suspend fun obtenerDescuentos(
-        @Query("periodo") periodo: String
-    ): List<dataDescuentos>
+        @Query("idTrabajador") idTrabajador: Int,
+        @Query("anio") anio: Int,
+        @Query("mes") mes: Int
+    ): dataDescuentos
 
     @GET("obtener_permisos.php")
     suspend fun obtenerPermisos(
@@ -66,10 +74,11 @@ interface ApiService {
     @POST("cambiar_contrasena.php")
     suspend fun cambiarContrasena(@Body request: CambiarClaveRequest): RecuperarResponse
 
-    // Contactos y Reportes
+    // contactos
     @GET("obtener_contactos.php")
     fun obtenerContactos(): Call<DataContactosRespuesta>
 
+    // reportes
     @GET("obtener_reportes.php")
     fun obtenerReportes(
         @Query("idTrabajador") idTrabajador: Int

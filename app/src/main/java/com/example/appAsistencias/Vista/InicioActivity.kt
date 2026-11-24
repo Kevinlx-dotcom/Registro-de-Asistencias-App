@@ -61,9 +61,11 @@ class InicioActivity : AppCompatActivity() {
 
         //4.Listener del menú
         txtMenu.setOnClickListener(this::ejecutarMenu)
-        findViewById<TextView>(R.id.txtContactos).setOnClickListener {
-            startActivity(Intent(this, ContactosActivity::class.java))
-        }
+        findViewById<View>(R.id.txtContactos).setOnClickListener { abrirContactos("contacto") }
+        findViewById<View>(R.id.txtAdministracion).setOnClickListener { abrirContactos("administracion") }
+        findViewById<View>(R.id.txtDirectivos).setOnClickListener { abrirContactos("directivo") }
+        findViewById<View>(R.id.navAsistencia).setOnClickListener { abrirAsistencias(0) }
+        txtJustificarAhora.setOnClickListener { abrirAsistencias(1) }
     }
 
     override fun onResume() {
@@ -73,40 +75,34 @@ class InicioActivity : AppCompatActivity() {
     }
 
     // Muestra el menú debajo de los 3 puntos
+    private fun abrirContactos(categoria: String) {
+        startActivity(Intent(this, ContactosActivity::class.java).apply {
+            putExtra("ID_TRABAJADOR", idTrabajador)
+            putExtra("CATEGORIA", categoria)
+        })
+    }
 
     fun ejecutarMenu(v: View) {
         val menu = PopupMenu(this, v)
-
         menu.menu.add("Reportes de asistencia")
         menu.menu.add("Cerrar sesión")
-
         menu.setOnMenuItemClickListener { opcion ->
             when (opcion.title.toString()) {
-
                 "Reportes de asistencia" -> {
-                    val intent = Intent(
-                        this,
-                        ReportesActivity::class.java
-                    )
-
-                    intent.putExtra("ID_TRABAJADOR", idTrabajador)
-                    startActivity(intent)
+                    startActivity(Intent(this, ReportesActivity::class.java).apply {
+                        putExtra("ID_TRABAJADOR", idTrabajador)
+                    })
                     true
                 }
-
                 "Cerrar sesión" -> {
                     presenter.cerrarSesion()
                     true
                 }
-
                 else -> false
             }
         }
-
         menu.show()
     }
-
-
 
     fun mostrarFecha(fecha: String, entradasSalidas: String, retardos: String) {
         txtFecha.text = fecha
@@ -146,6 +142,14 @@ class InicioActivity : AppCompatActivity() {
 
     fun mostrarError(mensaje: String) {
         Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+    }
+
+    // Abre la pantalla de asistencias (0 = Entradas/Salidas, 1 = Retardos)
+    fun abrirAsistencias(pestana: Int) {
+        val intent = Intent(this, AsistenciasActivity::class.java)
+        intent.putExtra("ID_TRABAJADOR", idTrabajador)
+        intent.putExtra("TAB", pestana)
+        startActivity(intent)
     }
 
     // Regresa al login y borra las pantallas anteriores

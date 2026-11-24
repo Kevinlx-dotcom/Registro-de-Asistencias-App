@@ -61,4 +61,6 @@ dependencies {
 
     // Para la huella digital
     implementation("androidx.biometric:biometric:1.1.0")
+
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 }
