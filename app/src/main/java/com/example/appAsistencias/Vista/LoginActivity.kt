@@ -98,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                 // el cipher ya viene desbloqueado por la huella
                 huellaPresenter.huellaCorrecta(
-                    result.cryptoObject!!.cipher,
+                    result.cryptoObject!!.cipher!!,
                     paraActivar,
                     txtCorreo.text.toString().trim(),
                     txtClave.text.toString().trim()

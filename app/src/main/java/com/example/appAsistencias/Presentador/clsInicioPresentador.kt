@@ -22,6 +22,10 @@ class clsInicioPresentador(private val view: InicioActivity) {
         view.mostrarFecha(fecha, "Entradas/Salidas · $mes", "Retardos · $mes")
     }
 
+    fun cerrarSesion() {
+        view.abrirLogin()
+    }
+
     fun cargarInicio(idTrabajador: Int) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
