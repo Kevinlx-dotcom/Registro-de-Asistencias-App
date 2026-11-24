@@ -13,6 +13,8 @@ import com.example.appAsistencias.Datos.RecuperarRequest
 import com.example.appAsistencias.Datos.RecuperarResponse
 import com.example.appAsistencias.Datos.DataContactosRespuesta
 import com.example.appAsistencias.Datos.DataReportesRespuesta
+import com.example.appAsistencias.Datos.dataDocumentosRespuesta
+import com.example.appAsistencias.Datos.dataPendienteRespuesta
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
@@ -56,6 +58,16 @@ interface ApiService {
     suspend fun obtenerPermisos(
         @Query("periodo") periodo: String
     ): List<dataPermisos>
+
+    @GET("obtener_pendientes.php")
+    suspend fun obtenerPendientes(
+        @Query("idTrabajador") idTrabajador: Int
+    ): dataPendienteRespuesta
+
+    @GET("obtener_documentos_justificar.php")
+    suspend fun obtenerDocumentosJustificar(
+        @Query("tipoIncidencia") tipoIncidencia: String
+    ): dataDocumentosRespuesta
 
     // login
     @POST("login.php")

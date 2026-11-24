@@ -13,7 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RegistroDeAsistencias">
-
         <activity
             android:name=".Vista.AsistenciasActivity"
             android:exported="false" />
@@ -37,6 +36,8 @@
             </intent-filter>
 
         </activity>
+
+        <!-- Activities de desarrollo -->
         <activity
             android:name=".Vista.InicioActivity"
             android:exported="false" />
@@ -53,7 +54,23 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
-
+        <!-- Activities de mi rama -->
+        <activity
+            android:name=".Vista.JustificarActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Vista.DetalleReporteActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Vista.JustificarActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Vista.DetalleReporteActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
