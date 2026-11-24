@@ -16,6 +16,11 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
+import com.example.appAsistencias.Datos.DataContactosRespuesta
+import com.example.appAsistencias.Datos.DataReportesRespuesta
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.http.Streaming
 interface ApiService {
 
     @GET("obtener_estadisticas.php")
@@ -60,4 +65,22 @@ interface ApiService {
 
     @POST("cambiar_contrasena.php")
     suspend fun cambiarContrasena(@Body request: CambiarClaveRequest): RecuperarResponse
+
+    // Contactos y Reportes
+    @GET("obtener_contactos.php")
+    fun obtenerContactos(): Call<DataContactosRespuesta>
+
+    @GET("obtener_reportes.php")
+    fun obtenerReportes(
+        @Query("idTrabajador") idTrabajador: Int
+    ): Call<DataReportesRespuesta>
+
+    @Streaming
+    @GET("descargar_reporte.php")
+    fun solicitarDescargaReporte(
+        @Query("idTrabajador") idTrabajador: Int,
+        @Query("anio") anio: Int,
+        @Query("mes") mes: Int,
+        @Query("formato") formato: String
+    ): Call<ResponseBody>
 }

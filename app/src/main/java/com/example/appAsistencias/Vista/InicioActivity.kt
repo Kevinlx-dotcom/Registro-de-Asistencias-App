@@ -61,6 +61,9 @@ class InicioActivity : AppCompatActivity() {
 
         //4.Listener del menú
         txtMenu.setOnClickListener(this::ejecutarMenu)
+        findViewById<TextView>(R.id.txtContactos).setOnClickListener {
+            startActivity(Intent(this, ContactosActivity::class.java))
+        }
     }
 
     override fun onResume() {
@@ -70,15 +73,40 @@ class InicioActivity : AppCompatActivity() {
     }
 
     // Muestra el menú debajo de los 3 puntos
+
     fun ejecutarMenu(v: View) {
         val menu = PopupMenu(this, v)
+
+        menu.menu.add("Reportes de asistencia")
         menu.menu.add("Cerrar sesión")
-        menu.setOnMenuItemClickListener {
-            presenter.cerrarSesion()
-            true
+
+        menu.setOnMenuItemClickListener { opcion ->
+            when (opcion.title.toString()) {
+
+                "Reportes de asistencia" -> {
+                    val intent = Intent(
+                        this,
+                        ReportesActivity::class.java
+                    )
+
+                    intent.putExtra("ID_TRABAJADOR", idTrabajador)
+                    startActivity(intent)
+                    true
+                }
+
+                "Cerrar sesión" -> {
+                    presenter.cerrarSesion()
+                    true
+                }
+
+                else -> false
+            }
         }
+
         menu.show()
     }
+
+
 
     fun mostrarFecha(fecha: String, entradasSalidas: String, retardos: String) {
         txtFecha.text = fecha
