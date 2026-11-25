@@ -1,12 +1,90 @@
-# Add project specific R8 rules here.
-# AGP will combine all keep rule files in src/main/keepRules to pass to R8
-#
-# For more details, see
-#   https://d.android.com/r/tools/r8/keep-rules
+# InterfaceApi / Network — ApiService (Retrofit)
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Protege la interfaz completa: Retrofit la lee por reflexión
+-keep interface com.example.appAsistencias.network.ApiService { *; }
+
+# Protege anotaciones de método: @GET, @POST
+-keepattributes RuntimeVisibleAnnotations
+
+# Protege anotaciones de parámetro: @Query
+-keepattributes RuntimeVisibleParameterAnnotations
+
+# Protege tipos genéricos: List<...>
+-keepattributes Signature
+
+# Protege clases internas (las que genera "suspend fun")
+-keepattributes InnerClasses
+
+# Protege la relación clase interna
+-keepattributes EnclosingMethod
+
+
+# Datos y Modelos — clases de datos (@Serializable, kotlinx.serialization)
+
+# Protege todas las clases de Datos/ y Modelo/ + sus descriptores de serialización
+-keep,includedescriptorclasses class com.example.appAsistencias.Datos.** { *; }
+-keep,includedescriptorclasses class com.example.appAsistencias.Modelo.** { *; }
+
+# Protege el Companion que genera cada @Serializable
+-keepclassmembers class com.example.appAsistencias.Datos.** {
+    *** Companion;
+}
+-keepclassmembers class com.example.appAsistencias.Modelo.** {
+    *** Companion;
+}
+
+# Protege el método serializer() que convierte JSON <-> objeto
+-keepclasseswithmembers class com.example.appAsistencias.Datos.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+-keepclasseswithmembers class com.example.appAsistencias.Modelo.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+# Protege @SerialName de cada campo (así sabe qué clave del JSON usar)
+-keepattributes *Annotation*
+
+
+# kotlinx.serialization (motor de serialización)
+
+# Protege anotaciones internas de la librería
+-keepattributes *Annotation*
+
+# Protege Companions dentro del motor JSON de la librería
+-keepclassmembers class kotlinx.serialization.json.** {
+    *** Companion;
+}
+
+# Protege serializer() en toda la librería, no solo en tu Modelo/
+-keepclasseswithmembers class kotlinx.serialization.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+# Ignora referencias a código que tu app Android
+-dontwarn kotlinx.serialization.**
+
+# Retrofit / OkHttp
+
+# Ignora advertencias inofensivas de Retrofit
+-dontwarn retrofit2.**
+
+# Ignora advertencias inofensivas de OkHttp
+-dontwarn okhttp3.**
+
+# Protege qué excepciones puede lanzar cada llamada de red
+-keepattributes Exceptions
+
+
+# Glide (imágenes)
+
+# Protege la clase que Glide genera para conectar sus módulos
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+
+# Protege toda la librería Glide
+-keep class com.bumptech.glide.** { *; }
+
+# Ignora advertencias inofensivas de Glide
+-dontwarn com.bumptech.glide.**
+
+
+# Vistas, Adaptadores y Presentadores: SIN reglas — se ofuscan libres.

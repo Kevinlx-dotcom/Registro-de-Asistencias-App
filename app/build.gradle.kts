@@ -10,7 +10,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.appcursos"
+        applicationId = "com.example.appAsistencias"
         minSdk = 28
         targetSdk = 37
         versionCode = 1
@@ -32,6 +32,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 }
+
 
 dependencies {
     implementation(libs.androidx.activity.ktx)
