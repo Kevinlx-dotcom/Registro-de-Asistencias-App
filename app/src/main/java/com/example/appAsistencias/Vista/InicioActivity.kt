@@ -59,13 +59,16 @@ class InicioActivity : AppCompatActivity() {
         //3. inicializar presentador
         presenter = clsInicioPresentador(this)
 
-        //4.Listener del menú
+        //4.Listeners del menú y navegación
         txtMenu.setOnClickListener(this::ejecutarMenu)
         findViewById<View>(R.id.txtContactos).setOnClickListener { abrirContactos("contacto") }
         findViewById<View>(R.id.txtAdministracion).setOnClickListener { abrirContactos("administracion") }
         findViewById<View>(R.id.txtDirectivos).setOnClickListener { abrirContactos("directivo") }
         findViewById<View>(R.id.navAsistencia).setOnClickListener { abrirAsistencias(0) }
-        txtJustificarAhora.setOnClickListener { abrirAsistencias(1) }
+        findViewById<View>(R.id.navJustificar).setOnClickListener { abrirJustificar() }
+        txtJustificarAhora.setOnClickListener { abrirJustificar() }
+        txtEntradasSalidas.setOnClickListener { abrirAsistencias(0) }
+        txtRetardos.setOnClickListener { abrirAsistencias(1) }
     }
 
     override fun onResume() {
@@ -144,7 +147,6 @@ class InicioActivity : AppCompatActivity() {
         Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
     }
 
-    // Abre la pantalla de asistencias (0 = Entradas/Salidas, 1 = Retardos)
     fun abrirAsistencias(pestana: Int) {
         val intent = Intent(this, AsistenciasActivity::class.java)
         intent.putExtra("ID_TRABAJADOR", idTrabajador)
@@ -152,7 +154,12 @@ class InicioActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    // Regresa al login y borra las pantallas anteriores
+    fun abrirJustificar() {
+        val intent = Intent(this, JustificarActivity::class.java)
+        intent.putExtra("ID_TRABAJADOR", idTrabajador)
+        startActivity(intent)
+    }
+
     fun abrirLogin() {
         val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

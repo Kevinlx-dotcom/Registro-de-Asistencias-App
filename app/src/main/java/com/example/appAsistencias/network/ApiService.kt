@@ -2,12 +2,14 @@ package com.example.appAsistencias.network
 
 import com.example.appAsistencias.Datos.CambiarClaveRequest
 import com.example.appAsistencias.Datos.dataDescuentos
+import com.example.appAsistencias.Datos.dataDocumentosRespuesta
 import com.example.appAsistencias.Datos.dataEntradasSalidas
 import com.example.appAsistencias.Datos.dataEstadisticas
 import com.example.appAsistencias.Datos.LoginRequest
 import com.example.appAsistencias.Datos.LoginResponse
 import com.example.appAsistencias.Datos.dataIncidencias
 import com.example.appAsistencias.Datos.dataInicio
+import com.example.appAsistencias.Datos.dataPendienteRespuesta
 import com.example.appAsistencias.Datos.dataPermisos
 import com.example.appAsistencias.Datos.RecuperarRequest
 import com.example.appAsistencias.Datos.RecuperarResponse
@@ -56,6 +58,16 @@ interface ApiService {
     suspend fun obtenerPermisos(
         @Query("periodo") periodo: String
     ): List<dataPermisos>
+
+    @GET("obtener_pendientes.php")
+    suspend fun obtenerPendientes(
+        @Query("idTrabajador") idTrabajador: Int
+    ): dataPendienteRespuesta
+
+    @GET("obtener_documentos_justificar.php")
+    suspend fun obtenerDocumentosJustificar(
+        @Query("tipoIncidencia") tipoIncidencia: String
+    ): dataDocumentosRespuesta
 
     // login
     @POST("login.php")
