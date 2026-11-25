@@ -2,6 +2,9 @@ package com.example.appAsistencias.Presentador
 
 import com.example.appAsistencias.Modelo.clsJustificarModelo
 import com.example.appAsistencias.Vista.JustificarActivity
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -10,6 +13,7 @@ import kotlinx.coroutines.withContext
 class clsJustificarPresentador(private val vista: JustificarActivity) {
 
     private val justificarModelo = clsJustificarModelo()
+    private val espanol = Locale.forLanguageTag("es-MX")
 
     fun obtenerPendientes(idTrabajador: Int) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -18,13 +22,22 @@ class clsJustificarPresentador(private val vista: JustificarActivity) {
                 withContext(Dispatchers.Main) {
                     if (respuesta.exito) {
                         val primero = respuesta.pendientes.firstOrNull()
+                        val total = if (respuesta.total > 0) respuesta.total else respuesta.pendientes.size
+
                         if (primero != null) {
+                            val tipoFormateado = primero.tipo.replaceFirstChar { it.uppercase() }
+                            val fechaFormateada = formatearFecha(primero.fecha)
+                            val horaFormateada = "Entrada ${primero.entrada?.take(5) ?: "--:--"} h"
+
                             vista.mostrarPendiente(
-                                "${primero.tipo} · ${primero.fecha}",
-                                "Entrada ${primero.entrada ?: "--:--"}"
+                                total,
+                                "$tipoFormateado · $fechaFormateada",
+                                horaFormateada,
+                                primero.tipo
                             )
-                            // Cargar los documentos de este tipo de incidencia (Retardo o Falta)
                             obtenerDocumentosJustificar(primero.tipo)
+                        } else {
+                            vista.mostrarPendienteVacio(total)
                         }
                     } else {
                         vista.mostrarError(respuesta.mensaje)
@@ -60,6 +73,15 @@ class clsJustificarPresentador(private val vista: JustificarActivity) {
                     vista.mostrarError("No se pudieron cargar los documentos")
                 }
             }
+        }
+    }
+
+    private fun formatearFecha(fechaStr: String): String {
+        return try {
+            val date = LocalDate.parse(fechaStr.take(10))
+            date.format(DateTimeFormatter.ofPattern("d 'de' MMMM", espanol))
+        } catch (e: Exception) {
+            fechaStr
         }
     }
 }

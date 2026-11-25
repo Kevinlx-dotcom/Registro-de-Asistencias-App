@@ -21,6 +21,9 @@ class clsAsistenciasPresentador(private val view: AsistenciasActivity) {
     // 0 = Entradas/Salidas, 1 = Retardos, 2 = Faltas, 3 = Descuentos
     private var pestana = 0
 
+    fun getAnio(): Int = mes.year
+    fun getMes(): Int = mes.monthValue
+
     fun cambiarMes(cantidad: Long, idTrabajador: Int) {
         mes = mes.plusMonths(cantidad)
         cargarAsistencias(idTrabajador)

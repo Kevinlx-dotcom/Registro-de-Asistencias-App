@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Vista.JustificarActivity">
 
     <!-- Barra Superior -->
     <TextView
@@ -20,6 +23,153 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Barra Inferior de Navegación -->
+    <LinearLayout
+        android:id="@+id/bottomNavContainer"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <!-- Item 1: Inicio -->
+            <LinearLayout
+                android:id="@+id/navInicio"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="32dp"
+                    android:layout_height="3dp"
+                    android:visibility="invisible" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:contentDescription="@string/inicio"
+                        android:src="@drawable/ic_home"
+                        app:tint="@color/text_secondary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/inicio"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Item 2: Asistencia -->
+            <LinearLayout
+                android:id="@+id/navAsistencia"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="32dp"
+                    android:layout_height="3dp"
+                    android:visibility="invisible" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:contentDescription="@string/asistencia_title"
+                        android:src="@drawable/ic_asistencia"
+                        app:tint="@color/text_secondary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/asistencia_title"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Item 3: Justificar (Selected) -->
+            <LinearLayout
+                android:id="@+id/navJustificar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="32dp"
+                    android:layout_height="3dp"
+                    android:background="@drawable/bg_active_tab_indicator" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:contentDescription="@string/justificar"
+                        android:src="@drawable/ic_justificar"
+                        app:tint="@color/green_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/justificar"
+                        android:textColor="@color/green_primary"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
 
     <!-- Tarjeta de Incidencias Pendientes -->
     <androidx.cardview.widget.CardView
@@ -45,7 +195,7 @@
                 android:id="@+id/txtTituloPendientes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PENDIENTES POR JUSTIFICAR"
+                android:text="PENDIENTES POR JUSTIFICAR (1)"
                 android:textSize="11sp"
                 android:textStyle="bold"
                 android:textColor="#555555" />
@@ -64,6 +214,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
+                    tools:text="Retardo · 22 de octubre"
                     android:textStyle="bold"
                     android:textSize="14sp"
                     android:textColor="#333333" />
@@ -74,6 +225,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text=""
+                    tools:text="Entrada 07:08 h"
                     android:textSize="12sp"
                     android:textColor="#555555" />
 
@@ -107,7 +259,7 @@
             android:id="@+id/txtTituloDocumentos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="DOCUMENTOS REQUERIDOS"
+            android:text="DOCUMENTOS PARA JUSTIFICAR UN RETARDO"
             android:textSize="11sp"
             android:textStyle="bold"
             android:textColor="#555555" />
@@ -117,10 +269,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:drawableStart="@android:drawable/checkbox_on_background"
+            android:drawableStart="@drawable/ic_check"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
             android:text=""
+            tools:text="Documento requerido 1\nEjemplo: comprobante del motivo del retardo"
             android:textSize="12sp"
             android:textColor="#333333" />
 
@@ -135,10 +288,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:drawableStart="@android:drawable/checkbox_on_background"
+            android:drawableStart="@drawable/ic_check"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
             android:text=""
+            tools:text="Documento requerido 2\nEjemplo: oficio de justificación firmado"
             android:textSize="12sp"
             android:textColor="#333333" />
 
@@ -153,10 +307,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:drawableStart="@android:drawable/checkbox_on_background"
+            android:drawableStart="@drawable/ic_check"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
             android:text=""
+            tools:text="Documento requerido 3\nEjemplo: copia de identificación oficial"
             android:textSize="12sp"
             android:textColor="#333333" />
 
