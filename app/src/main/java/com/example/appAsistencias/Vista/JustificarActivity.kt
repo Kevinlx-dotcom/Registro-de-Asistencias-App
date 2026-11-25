@@ -1,6 +1,8 @@
 package com.example.appAsistencias.Vista
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -13,8 +15,10 @@ import com.example.appAsistencias.R
 class JustificarActivity : AppCompatActivity() {
 
     private lateinit var presenter: clsJustificarPresentador
+    private lateinit var txtTituloPendientes: TextView
     private lateinit var txtTipoFechaIncidencia: TextView
     private lateinit var txtHoraEntrada: TextView
+    private lateinit var txtTituloDocumentos: TextView
     private lateinit var txtDoc1: TextView
     private lateinit var txtDoc2: TextView
     private lateinit var txtDoc3: TextView
@@ -33,11 +37,27 @@ class JustificarActivity : AppCompatActivity() {
         }
 
         // 1. Enlazar componentes del XML
+        txtTituloPendientes = findViewById(R.id.txtTituloPendientes)
         txtTipoFechaIncidencia = findViewById(R.id.txtTipoFechaIncidencia)
         txtHoraEntrada = findViewById(R.id.txtHoraEntrada)
+        txtTituloDocumentos = findViewById(R.id.txtTituloDocumentos)
         txtDoc1 = findViewById(R.id.txtDoc1)
         txtDoc2 = findViewById(R.id.txtDoc2)
         txtDoc3 = findViewById(R.id.txtDoc3)
+
+        // Listeners de la barra de navegación inferior
+        findViewById<View>(R.id.navInicio).setOnClickListener {
+            val intent = Intent(this, InicioActivity::class.java)
+            intent.putExtra("ID_TRABAJADOR", idTrabajador)
+            startActivity(intent)
+            finish()
+        }
+        findViewById<View>(R.id.navAsistencia).setOnClickListener {
+            val intent = Intent(this, AsistenciasActivity::class.java)
+            intent.putExtra("ID_TRABAJADOR", idTrabajador)
+            startActivity(intent)
+            finish()
+        }
 
         // 2. Obtener el ID del trabajador enviado al iniciar esta Activity
         idTrabajador = intent.getIntExtra("ID_TRABAJADOR", 0)
@@ -47,10 +67,18 @@ class JustificarActivity : AppCompatActivity() {
         presenter.obtenerPendientes(idTrabajador)
     }
 
-    // Llamado por clsJustificarPresentador con la primera incidencia pendiente
-    fun mostrarPendiente(tipoFecha: String, horaEntrada: String) {
+    // Llamado por clsJustificarPresentador con la incidencia pendiente
+    fun mostrarPendiente(total: Int, tipoFecha: String, horaEntrada: String, tipo: String) {
+        txtTituloPendientes.text = "PENDIENTES POR JUSTIFICAR ($total)"
         txtTipoFechaIncidencia.text = tipoFecha
         txtHoraEntrada.text = horaEntrada
+        txtTituloDocumentos.text = "DOCUMENTOS PARA JUSTIFICAR UN ${tipo.uppercase()}"
+    }
+
+    fun mostrarPendienteVacio(total: Int) {
+        txtTituloPendientes.text = "PENDIENTES POR JUSTIFICAR ($total)"
+        txtTipoFechaIncidencia.text = "Sin pendientes"
+        txtHoraEntrada.text = "No tienes incidencias por justificar"
     }
 
     // Llamado por clsJustificarPresentador con los documentos requeridos

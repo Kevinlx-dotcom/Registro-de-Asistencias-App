@@ -1,5 +1,6 @@
 package com.example.appAsistencias.Vista
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.appAsistencias.Datos.dataFilaAsistencia
 import com.example.appAsistencias.R
 
-class AsistenciaAdapter(private val filas: List<dataFilaAsistencia>) :
-    RecyclerView.Adapter<AsistenciaAdapter.FilaViewHolder>() {
+class AsistenciaAdapter(
+    private val filas: List<dataFilaAsistencia>,
+    private val idTrabajador: Int = 0
+) : RecyclerView.Adapter<AsistenciaAdapter.FilaViewHolder>() {
 
     class FilaViewHolder(vista: View) : RecyclerView.ViewHolder(vista) {
         val txtDia: TextView = vista.findViewById(R.id.tvDay)
@@ -39,6 +42,11 @@ class AsistenciaAdapter(private val filas: List<dataFilaAsistencia>) :
             )
         )
         holder.txtJustificar.visibility = if (fila.puedeJustificar) View.VISIBLE else View.GONE
+        holder.txtJustificar.setOnClickListener {
+            val intent = Intent(holder.itemView.context, JustificarActivity::class.java)
+            intent.putExtra("ID_TRABAJADOR", idTrabajador)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = filas.size

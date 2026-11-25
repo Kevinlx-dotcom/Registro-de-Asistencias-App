@@ -1,5 +1,6 @@
 package com.example.appAsistencias.Vista
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -59,6 +60,10 @@ class AsistenciasActivity : AppCompatActivity() {
         findViewById<View>(R.id.tabFaltas).setOnClickListener { presenter.cambiarPestana(2, idTrabajador) }
         findViewById<View>(R.id.tabDescuentos).setOnClickListener { presenter.cambiarPestana(3, idTrabajador) }
         findViewById<View>(R.id.navInicio).setOnClickListener { finish() }
+
+        // Navegación hacia las pantallas de Francisco H. enviando el mes y año seleccionados
+        findViewById<View>(R.id.btnReportes).setOnClickListener { abrirDetalleReporte() }
+        findViewById<View>(R.id.navJustificar).setOnClickListener { abrirJustificar() }
     }
 
     override fun onResume() {
@@ -66,6 +71,20 @@ class AsistenciasActivity : AppCompatActivity() {
         // desde el inicio se puede abrir directo en Retardos (TAB = 1)
         presenter.cambiarPestana(intent.getIntExtra("TAB", 0), idTrabajador)
         intent.removeExtra("TAB")
+    }
+
+    fun abrirDetalleReporte() {
+        val intent = Intent(this, DetalleReporteActivity::class.java)
+        intent.putExtra("ID_TRABAJADOR", idTrabajador)
+        intent.putExtra("ANIO", presenter.getAnio())
+        intent.putExtra("MES", presenter.getMes())
+        startActivity(intent)
+    }
+
+    fun abrirJustificar() {
+        val intent = Intent(this, JustificarActivity::class.java)
+        intent.putExtra("ID_TRABAJADOR", idTrabajador)
+        startActivity(intent)
     }
 
     fun mostrarMes(texto: String) {
@@ -77,7 +96,7 @@ class AsistenciasActivity : AppCompatActivity() {
     }
 
     fun mostrarLista(filas: List<dataFilaAsistencia>) {
-        rvAsistencias.adapter = AsistenciaAdapter(filas)
+        rvAsistencias.adapter = AsistenciaAdapter(filas, idTrabajador)
     }
 
     // Pinta de verde la pestaña activa

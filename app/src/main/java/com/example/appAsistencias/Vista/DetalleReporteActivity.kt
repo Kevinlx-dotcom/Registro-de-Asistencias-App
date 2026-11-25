@@ -1,7 +1,6 @@
 package com.example.appAsistencias.Vista
 
 import android.os.Bundle
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -14,6 +13,7 @@ import com.example.appAsistencias.Datos.dataEntradasSalidas
 import com.example.appAsistencias.Datos.dataEstadisticas
 import com.example.appAsistencias.Presentador.clsDetalleReportePresentador
 import com.example.appAsistencias.R
+import java.time.YearMonth
 
 class DetalleReporteActivity : AppCompatActivity() {
 
@@ -26,8 +26,6 @@ class DetalleReporteActivity : AppCompatActivity() {
     private lateinit var txtNumFaltas: TextView
     private lateinit var txtNumReportes: TextView
     private lateinit var rvDetalleMes: RecyclerView
-    private lateinit var btnDescargarPdf: Button
-    private lateinit var btnDescargarExcel: Button
 
     private var idTrabajador = 0
     private var anio = 0
@@ -53,28 +51,35 @@ class DetalleReporteActivity : AppCompatActivity() {
         txtNumFaltas = findViewById(R.id.txtNumFaltas)
         txtNumReportes = findViewById(R.id.txtNumReportes)
         rvDetalleMes = findViewById(R.id.rvDetalleMes)
-        btnDescargarPdf = findViewById(R.id.btnDescargarPdf)
-        btnDescargarExcel = findViewById(R.id.btnDescargarExcel)
 
         rvDetalleMes.layoutManager = LinearLayoutManager(this)
 
-        // 2. Obtener los datos enviados desde Reportes
-        idTrabajador = intent.getIntExtra("ID_TRABAJADOR", 0)
-        anio = intent.getIntExtra("ANIO", 0)
-        mes = intent.getIntExtra("MES", 0)
+        // Acción para el botón de regresar
+        txtTituloDetalle.setOnClickListener { finish() }
 
-        // 3. Inicializar el presentador y cargar el detalle
+        // 2. Obtener los datos dinámicos enviados desde la pantalla de Asistencias
+        idTrabajador = intent.getIntExtra("ID_TRABAJADOR", 0)
+        anio = intent.getIntExtra("ANIO", YearMonth.now().year)
+        mes = intent.getIntExtra("MES", YearMonth.now().monthValue)
+
+        // Nombre dinámico del mes para el encabezado
+        val mesesNombre = arrayOf("", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+        val nombreMes = if (mes in 1..12) mesesNombre[mes] else "Noviembre"
+        txtTituloDetalle.text = "Reporte · $nombreMes $anio"
+
+        // 3. Inicializar el presentador y cargar los datos reales del mes seleccionado
         presenter = clsDetalleReportePresentador(this)
         presenter.obtenerDetalleReporte(idTrabajador, anio, mes)
     }
 
     fun mostrarDetalleReporte(estadisticas: dataEstadisticas, entradasSalidas: dataEntradasSalidas) {
-        txtNumAsistencias.text = estadisticas.estadisticas.asistencias.toString()
-        txtNumEntradas.text = estadisticas.estadisticas.entradas.toString()
-        txtNumSalidas.text = estadisticas.estadisticas.salidas.toString()
-        txtNumRetardos.text = estadisticas.estadisticas.retardos.toString()
-        txtNumFaltas.text = estadisticas.estadisticas.faltas.toString()
-        txtNumReportes.text = estadisticas.estadisticas.reportes.toString()
+        val e = estadisticas.estadisticas
+        txtNumAsistencias.text = e.asistencias.toString()
+        txtNumEntradas.text = e.entradas.toString()
+        txtNumSalidas.text = e.salidas.toString()
+        txtNumRetardos.text = e.retardos.toString()
+        txtNumFaltas.text = e.faltas.toString()
+        txtNumReportes.text = e.reportes.toString()
 
         rvDetalleMes.adapter = DetalleAdapter(entradasSalidas.dias)
     }

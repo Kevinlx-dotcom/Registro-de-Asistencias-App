@@ -26,10 +26,31 @@ class DetalleAdapter(private val listaDias: List<dataDiaEntradaSalida>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dia = listaDias[position]
         holder.txtFechaChecada.text = dia.fecha
-        val entrada = dia.entrada.ifEmpty { "--:--" }
-        val salida = dia.salida.ifEmpty { "--:--" }
-        holder.txtHorasChecada.text = "Entrada $entrada · Salida $salida"
-        holder.txtEstatusChecada.text = dia.estatus
+
+        val entradaTxt = if (dia.entrada.isNotEmpty()) "${dia.entrada} h" else "--:--"
+        val salidaTxt = if (dia.salida.isNotEmpty()) "${dia.salida} h" else "sin salida"
+        holder.txtHorasChecada.text = "$entradaTxt · $salidaTxt"
+
+        val colorRes = when (dia.estatus.lowercase()) {
+            "a_tiempo", "puntual" -> {
+                holder.txtEstatusChecada.text = "A tiempo"
+                R.color.green_primary
+            }
+            "retardo" -> {
+                holder.txtEstatusChecada.text = "Retardo"
+                R.color.orange_warning
+            }
+            "falta" -> {
+                holder.txtEstatusChecada.text = "Falta"
+                R.color.text_primary
+            }
+            else -> {
+                holder.txtEstatusChecada.text = dia.estatus
+                R.color.text_secondary
+            }
+        }
+
+        holder.txtEstatusChecada.setTextColor(holder.itemView.context.getColor(colorRes))
     }
 
     override fun getItemCount(): Int = listaDias.size
