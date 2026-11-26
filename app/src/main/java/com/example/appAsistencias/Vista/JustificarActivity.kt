@@ -49,12 +49,14 @@ class JustificarActivity : AppCompatActivity() {
         findViewById<View>(R.id.navInicio).setOnClickListener {
             val intent = Intent(this, InicioActivity::class.java)
             intent.putExtra("ID_TRABAJADOR", idTrabajador)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
             finish()
         }
         findViewById<View>(R.id.navAsistencia).setOnClickListener {
             val intent = Intent(this, AsistenciasActivity::class.java)
             intent.putExtra("ID_TRABAJADOR", idTrabajador)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
             finish()
         }

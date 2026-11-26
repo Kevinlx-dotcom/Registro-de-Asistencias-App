@@ -17,12 +17,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.example.appAsistencias.Datos.DataReporte
-import com.example.appAsistencias.Datos.DataReportesRespuesta
+import com.example.appAsistencias.Datos.dataReporte
+import com.example.appAsistencias.Datos.ReportesResponse
 import com.example.appAsistencias.Presentador.clsReportesPresentador
 
-class ReportesActivity : AppCompatActivity(),
-    clsReportesPresentador.Vista {
+class ReportesActivity : AppCompatActivity() {
 
     private val verde = Color.rgb(20, 118, 62)
     private val oscuro = Color.rgb(35, 43, 51)
@@ -138,14 +137,14 @@ class ReportesActivity : AppCompatActivity(),
         }
     }
 
-    override fun mostrarReportes(datos: DataReportesRespuesta) {
+    fun mostrarReportes(datos: ReportesResponse) {
         if (isFinishing || isDestroyed) return
 
         contenido.removeAllViews()
         mostrarIntroduccion()
 
         val reportes = datos.reportes.sortedWith(
-            compareByDescending<DataReporte> { it.anio }
+            compareByDescending<dataReporte> { it.anio }
                 .thenByDescending { it.mes }
         )
 
@@ -159,7 +158,7 @@ class ReportesActivity : AppCompatActivity(),
         }
     }
 
-    override fun mostrarError(mensaje: String) {
+    fun mostrarError(mensaje: String) {
         if (isFinishing || isDestroyed) return
 
         contenido.removeAllViews()
@@ -176,7 +175,7 @@ class ReportesActivity : AppCompatActivity(),
         })
     }
 
-    private fun mostrarMes(reporte: DataReporte) {
+    private fun mostrarMes(reporte: dataReporte) {
         val periodo = nombreMes(reporte.mes) + " " + reporte.anio
 
         val titulo = TextView(this).apply {
@@ -287,7 +286,7 @@ class ReportesActivity : AppCompatActivity(),
         }
     }
 
-    private fun verReporte(reporte: DataReporte) {
+    private fun verReporte(reporte: dataReporte) {
         val periodo = nombreMes(reporte.mes) + " " + reporte.anio
 
         AlertDialog.Builder(this)
@@ -303,7 +302,7 @@ class ReportesActivity : AppCompatActivity(),
     }
 
     private fun descargar(
-        reporte: DataReporte,
+        reporte: dataReporte,
         formato: String
     ) {
         if (idTrabajador <= 0) {

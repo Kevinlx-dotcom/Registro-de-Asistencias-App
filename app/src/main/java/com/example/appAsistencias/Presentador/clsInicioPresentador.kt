@@ -1,6 +1,7 @@
 package com.example.appAsistencias.Presentador
 
 import com.example.appAsistencias.Modelo.clsInicioModelo
+import com.example.appAsistencias.Modelo.clsSesionModelo
 import com.example.appAsistencias.Vista.InicioActivity
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -12,6 +13,7 @@ import kotlinx.coroutines.withContext
 
 class clsInicioPresentador(private val view: InicioActivity) {
     private val modelo = clsInicioModelo()
+    private val sesion = clsSesionModelo(view)
 
     fun mostrarFechaYMes() {
         val hoy = LocalDate.now()
@@ -22,8 +24,14 @@ class clsInicioPresentador(private val view: InicioActivity) {
         view.mostrarFecha(fecha, "Entradas/Salidas · $mes", "Retardos · $mes")
     }
 
-    fun cerrarSesion() {
-        view.abrirLogin()
+    // Decide qué hacer con la opción que se eligió en el menú de los 3 puntos
+    fun elegirOpcionMenu(opcion: String) {
+        if (opcion == "Cerrar sesión") {
+            sesion.cerrar()
+            view.abrirLogin()
+        } else {
+            view.abrirReportes()
+        }
     }
 
     fun cargarInicio(idTrabajador: Int) {

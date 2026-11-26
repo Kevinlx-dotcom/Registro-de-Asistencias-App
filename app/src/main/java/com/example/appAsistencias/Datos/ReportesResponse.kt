@@ -1,0 +1,11 @@
+package com.example.appAsistencias.Datos
+
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class ReportesResponse(
+    @SerialName("exito") val exito: Boolean = false,
+    @SerialName("mensaje") val mensaje: String = "",
+    @SerialName("reportes") val reportes: List<dataReporte> = emptyList()
+)
