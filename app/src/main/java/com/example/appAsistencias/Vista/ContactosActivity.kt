@@ -15,12 +15,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.example.appAsistencias.Datos.DataContacto
-import com.example.appAsistencias.Datos.DataContactosRespuesta
+import com.example.appAsistencias.Datos.dataContacto
+import com.example.appAsistencias.Datos.ContactosResponse
 import com.example.appAsistencias.Presentador.clsContactosPresentador
 
-class ContactosActivity : AppCompatActivity(),
-    clsContactosPresentador.Vista {
+class ContactosActivity : AppCompatActivity() {
 
     private val verde = Color.rgb(20, 118, 62)
     private val oscuro = Color.rgb(35, 43, 51)
@@ -127,7 +126,7 @@ class ContactosActivity : AppCompatActivity(),
         presentador.cargarContactos()
     }
 
-    override fun mostrarContactos(datos: DataContactosRespuesta) {
+    fun mostrarContactos(datos: ContactosResponse) {
         if (isFinishing || isDestroyed) return
 
         lista.removeAllViews()
@@ -171,7 +170,7 @@ class ContactosActivity : AppCompatActivity(),
         }
     }
 
-    override fun mostrarError(mensaje: String) {
+    fun mostrarError(mensaje: String) {
         if (!isFinishing && !isDestroyed) {
             lista.removeAllViews()
             mensaje(mensaje)
@@ -181,7 +180,7 @@ class ContactosActivity : AppCompatActivity(),
     private fun grupo(
         titulo: String,
         categoria: String,
-        contactos: List<DataContacto>
+        contactos: List<dataContacto>
     ) {
         if (contactos.isEmpty()) return
 

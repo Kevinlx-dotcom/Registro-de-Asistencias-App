@@ -59,7 +59,11 @@ class InicioActivity : AppCompatActivity() {
         //3. inicializar presentador
         presenter = clsInicioPresentador(this)
 
-        //4.Listeners del menú y navegación
+        //4.Listeners
+        configurarListeners()
+    }
+
+    private fun configurarListeners() {
         txtMenu.setOnClickListener(this::ejecutarMenu)
         findViewById<View>(R.id.txtContactos).setOnClickListener { abrirContactos("contacto") }
         findViewById<View>(R.id.txtAdministracion).setOnClickListener { abrirContactos("administracion") }
@@ -77,7 +81,6 @@ class InicioActivity : AppCompatActivity() {
         presenter.cargarInicio(idTrabajador)
     }
 
-    // Muestra el menú debajo de los 3 puntos
     private fun abrirContactos(categoria: String) {
         startActivity(Intent(this, ContactosActivity::class.java).apply {
             putExtra("ID_TRABAJADOR", idTrabajador)
@@ -85,26 +88,22 @@ class InicioActivity : AppCompatActivity() {
         })
     }
 
+    // Muestra el menú debajo de los 3 puntos
     fun ejecutarMenu(v: View) {
         val menu = PopupMenu(this, v)
         menu.menu.add("Reportes de asistencia")
         menu.menu.add("Cerrar sesión")
         menu.setOnMenuItemClickListener { opcion ->
-            when (opcion.title.toString()) {
-                "Reportes de asistencia" -> {
-                    startActivity(Intent(this, ReportesActivity::class.java).apply {
-                        putExtra("ID_TRABAJADOR", idTrabajador)
-                    })
-                    true
-                }
-                "Cerrar sesión" -> {
-                    presenter.cerrarSesion()
-                    true
-                }
-                else -> false
-            }
+            presenter.elegirOpcionMenu(opcion.title.toString())
+            true
         }
         menu.show()
+    }
+
+    fun abrirReportes() {
+        val intent = Intent(this, ReportesActivity::class.java)
+        intent.putExtra("ID_TRABAJADOR", idTrabajador)
+        startActivity(intent)
     }
 
     fun mostrarFecha(fecha: String, entradasSalidas: String, retardos: String) {

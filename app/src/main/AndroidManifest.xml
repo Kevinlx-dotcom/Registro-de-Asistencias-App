@@ -36,7 +36,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Activities de desarrollo -->
         <activity
             android:name=".Vista.InicioActivity"
             android:exported="false" />
@@ -48,11 +47,6 @@
 
         <activity
             android:name=".Vista.CambiarClaveActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-
-        <activity
-            android:name=".Vista.MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 

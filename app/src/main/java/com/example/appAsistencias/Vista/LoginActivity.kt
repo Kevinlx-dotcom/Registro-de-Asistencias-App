@@ -54,6 +54,9 @@ class LoginActivity : AppCompatActivity() {
         btnLogin.setOnClickListener(this::ejecutarInicioSesion)
         btnHuella.setOnClickListener(this::ejecutarHuella)
         txtOlvideClave.setOnClickListener(this::abrirRecuperar)
+
+        //4. si ya hay sesión guardada, entra directo a Inicio
+        presenter.revisarSesion()
     }
 
     fun ejecutarInicioSesion(v: View) {
@@ -72,6 +75,10 @@ class LoginActivity : AppCompatActivity() {
     fun loginExitoso(mensaje: String, idTrabajador: Int) {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
         huellaPresenter.despuesDelLogin(idTrabajador)
+    }
+
+    fun loginFallido(mensaje: String) {
+        huellaPresenter.loginFallido(mensaje)
     }
 
     fun abrirInicio(idTrabajador: Int) {

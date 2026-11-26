@@ -8,9 +8,11 @@ class clsHuellaPresentador(private val view: LoginActivity) {
     private val modelo = clsHuellaModelo(view)
     private val login = clsLoginPresentador(view)   // se reutiliza el login normal
     private var idTrabajador = 0
+    private var entrandoConHuella = false
 
     // Después de un login correcto: ofrece activar la huella o entra directo
     fun despuesDelLogin(id: Int) {
+        entrandoConHuella = false
         idTrabajador = id
         if (modelo.puedeUsarHuella() && !modelo.estaActivada()) {
             view.preguntarActivarHuella()
@@ -56,10 +58,22 @@ class clsHuellaPresentador(private val view: LoginActivity) {
                 modelo.guardar(correo, clave, cipher)
                 view.abrirInicio(idTrabajador)
             } else {
+                entrandoConHuella = true
                 login.realizarLogin(modelo.obtenerCorreo(), modelo.descifrarClave(cipher))
             }
         } catch (e: Exception) {
             view.mostrarError("No se pudo usar la huella, inicia sesión con tu contraseña")
+        }
+    }
+
+    // El servidor rechazó el login: si venía de la huella, la contraseña guardada ya no sirve
+    fun loginFallido(mensaje: String) {
+        if (entrandoConHuella) {
+            entrandoConHuella = false
+            modelo.desactivar()
+            view.mostrarError("Tu contraseña cambió. Inicia sesión con ella y activa la huella de nuevo")
+        } else {
+            view.mostrarError(mensaje)
         }
     }
 
